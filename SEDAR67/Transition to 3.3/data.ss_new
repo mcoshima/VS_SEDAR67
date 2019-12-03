@@ -1,13 +1,13 @@
-#V3.30.14.05-safe;_2019_09_05;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#V3.30.14.00-safe;_2019_07_19;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
 #_user_info_available_at:https://vlab.ncep.noaa.gov/group/stock-synthesis
-#_Start_time: Tue Dec 03 10:01:02 2019
+#_Start_time: Tue Dec 03 12:13:45 2019
 #_Number_of_datafiles: 1
 
 #_observed data: 
-#V3.30.14.05-safe;_2019_09_05;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#V3.30.14.00-safe;_2019_07_19;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
 1950 #_StartYr
@@ -329,7 +329,7 @@
 6 0 0 0 # HB_W
 7 1 0 0 # CM_E_IFQ
 8 1 0 0 # CM_W_IFQ
-9 0 0 0 # LARVAL
+9 30 0 0 # LARVAL
 10 0 0 0 # VIDEO
 11 0 0 0 # SEAMAP
 #_yr month fleet obs stderr

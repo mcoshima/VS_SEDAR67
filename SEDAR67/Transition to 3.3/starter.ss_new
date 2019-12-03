@@ -1,4 +1,4 @@
-#V3.30.14.05-safe;_2019_09_05;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#V3.30.14.00-safe;_2019_07_19;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
 #_user_support_available_at:NMFS.Stock.Synthesis@noaa.gov
@@ -6,7 +6,7 @@
 #C SEDAR 67 Gulf of Mexico Vermilion Snapper Stock Assessment 2019/2020
 vermilion.dat
 vermilion.ctl
-1 # 0=use init values in control file; 1=use ss.par
+0 # 0=use init values in control file; 1=use ss.par
 1 # run display detail (0,1,2)
 1 # detailed output (0=minimal for data-limited, 1=high (w/ wtatage.ss_new), 2=brief) 
 0 # write 1st iteration details to echoinput.sso file (0,1) 
