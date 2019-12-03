@@ -1,0 +1,92 @@
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+library("r4ss")
+# hessian
+rm(myreplist)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+install.packages("r4ss")
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+library("r4ss")
+# hessian
+rm(myreplist)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+SS_fitbiasramp(base)
+install.packages("devtools")
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base$highcor
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+direct2<-"D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Base_3.24_run_with_plots\\est rec dev to 2014"
+base2 <- SS_output(dir = direct2,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base2)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base$highcor
+base2$highcor
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+# hessian
+rm(myreplist)
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+library("r4ss")
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "E:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- "D:\\NOAA FILES\\Work Projects\\SEDAR 67 Vermilion Snapper\\transition work\\Convert to 3.3 by hand\\All_at_once"
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_fitbiasramp(base)
+base$highcor

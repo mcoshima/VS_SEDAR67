@@ -1,0 +1,24 @@
+#V3.30.14.05-safe;_2019_09_05;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
+Thu Nov 07 11:14:20 2019
+
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2007 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2007 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2008 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2008 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2009 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2009 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2010 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2010 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2011 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2011 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2012 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2012 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2013 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2013 1 8
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2014 1 2
+warn just once for:  Observation exists, but nil selected fish for year, seas, fleet 2014 1 8
+setting positive forecast relF for bycatch fleet: 4
+ N warnings: 16
+Number_of_active_parameters_on_or_near_bounds: 0
