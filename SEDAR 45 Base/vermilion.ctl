@@ -35,7 +35,7 @@
 #																															
 #	Prior	types	(-1	=	none,	0=normal,	1=symmetric	beta,	2=full	beta,	3=lognormal)																				
 #_growth_parms																															
-#_LO	HI	INIT	PRIOR	PR_type	SD	PHASE	env-var	use_dev	dev_minyr	dev_maxyr	dev_stddev	Block	Block_Fxn																		
+#_LO	HI	    INIT	  PRIOR	   PR_type SD	PHASE	env-var	use_dev	dev_minyr	dev_maxyr	dev_stddev	Block	Block_Fxn																		
 #0.01    0.5    0.257     0.257       3  0.5     -1      0       0       0               0               0               0       0 #NatM_p_1_Fem_GP_1																			
 0.0001  1000000 11.83     11.83      -1  0       -1      0       0       0               0               0               0       0 #L_at_Amin_Fem_GP_1																
 0.0001  1000000 34.4      34.4       -1  0       -1      0       0       0               0               0               0       0 #L_at_Amax_Fem_GP_1																
