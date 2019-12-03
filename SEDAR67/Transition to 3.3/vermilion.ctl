@@ -103,7 +103,7 @@
 0  #  future feature:  0/1 to make realized sigmaR a function of SR curvature
 #_ LO      HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
    0       16        8           6.91          0             0          1          0          0          0          0          0          0          0 # SR_LN(R0)
-  0.22     0.96      0.75           0.6          0.74           0          2          0          0          0          0          0          0          0 # SR_BH_steep
+  0.22     0.96      0.75           0.6          0.74           0          3          0          0          0          0          0          0          0 # SR_BH_steep
    0       2      0.263505          0.2           0             0          3          0          0          0          0          0          0          0 # SR_sigmaR
   -5       5            0           0             0             0         -3          0          0          0          0          0          0          0 # SR_regime
    0       0.5          0           0             0             0         -2          0          0          0          0          0          0          0 # SR_autocorr
@@ -178,7 +178,7 @@
            -25            25       0             0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_CM_E(1)
            -25            25      0            0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_CM_W(2)
            -25            25      0            0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_REC(3)
-           -10            20       0             0             0            0         2          0          0          0          0          0          0          0  #  LnQ_base_SMP_BYC(4)
+           -25            25       0             0             0            0         2          0          0          0          0          0          0          0  #  LnQ_base_SMP_BYC(4)
            -25            25      0             0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_HB_E(5)
            -25            25      0             0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_HB_W(6)
            -25            25      0             0             1             0         -1          0          0          0          0          0          0          0  #  LnQ_base_CM_E_IFQ(7)
