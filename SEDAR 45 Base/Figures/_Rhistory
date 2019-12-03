@@ -1,0 +1,443 @@
+setwd("R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/11. Add growth CV_batch fec 82_adjustM")
+library("r4ss")
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+seq(1,55, 2)
+SS_plots(replist = base, uncertainty=T, sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=F,
+printfolder="R_Plots_Report", dir="default", pdf=T)
+base <- SS_output(dir = direct,printstats = T, covar=F, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+SS_plots(replist = base, uncertainty=F, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+direct <- getwd()
+require(r4ss)
+dat_file_name <- 'vermilion.dat'
+base <- SS_output(dir = direct, covar=T, cormax=0.70, forecast=F, verbose = F)
+base <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F)
+Reweighter <- function(replist, kind = 'AGE', dat_file_name, max_effn = 100)
+{
+if(kind == 'AGE') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$agedbase # extract agecomp data from report file
+dat_base <- ss_dat$agecomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+dat_base$Nsamp <- report_extract$effN # replace agecomp N's with report file Neffs
+ss_dat_new$agecomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$agedbase
+dat_base_new <- ss_dat_new$agecomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'AGE', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$agecomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3 -nohess",wait=T,show.output.on.console=T)
+}
+}
+#------------------------------------------------------
+if(kind == 'LEN') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$lendbase # extract agecomp data from report file
+dat_base <- ss_dat$lencomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+dat_base$Nsamp <- report_extract$effN # replace agecomp N's with report file Neffs
+ss_dat_new$lencomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$lendbase
+dat_base_new <- ss_dat_new$lencomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'LEN', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$lencomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3",wait=T,show.output.on.console=T)
+}
+}
+}
+direct
+Reweighter(base, 'AGE', dat_file_name)
+Reweighter(base, 'LEN', dat_file_name)
+setwd("R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/11. Add growth CV_batch fec 82_adjustM")
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+Reweighter <- function(replist, kind = 'AGE', dat_file_name, max_effn = 100)
+{
+if(kind == 'AGE') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$agedbase # extract agecomp data from report file
+dat_base <- ss_dat$agecomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+dat_base$Nsamp <- report_extract$effN # replace agecomp N's with report file Neffs
+ss_dat_new$agecomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$agedbase
+dat_base_new <- ss_dat_new$agecomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'AGE', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$agecomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3 -nohess",wait=T,show.output.on.console=T)
+}
+}
+#------------------------------------------------------
+if(kind == 'LEN') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$lendbase # extract agecomp data from report file
+dat_base <- ss_dat$lencomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+dat_base$Nsamp <- report_extract$effN # replace agecomp N's with report file Neffs
+ss_dat_new$lencomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$lendbase
+dat_base_new <- ss_dat_new$lencomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'LEN', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$lencomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3 -nohess",wait=T,show.output.on.console=T)
+}
+}
+}
+Reweighter(base, 'LEN', dat_file_name)
+base <- SS_output(dir = direct,printstats = T, covar=F, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=F, sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=F,
+printfolder="R_Plots_Report", dir="default", pdf=T)
+Reweighter(base, 'LEN', dat_file_name)
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$agedbase # extract agecomp data from report file
+replist <- base
+report_base <- replist$agedbase # extract agecomp data from report file
+dat_base <- ss_dat$agecomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+dat_base
+report_base
+names(report_base)
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+report_extract
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$lendbase # extract lengthcomp data from report file
+dat_base <- ss_dat$lencomp # extract lengthcomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+dat_base
+report_extract
+names(dat_base)
+dat_base$FltSry
+dat_base$FltSvy
+i=10
+report_extract[report_extract$fleet == i, ]$effN
+report_extract[report_extract$Fleet == i, ]$effN
+report_extract
+dat_base[dat_base$FltSvy == i, ]$Nsamp
+dat_base_tmp <-dat_base
+for(i in unique(dat_base$FltSvy)){
+dat_base[dat_base$FltSvy == i, ]$Nsamp <- report_extract[report_extract$Fleet == i, ]$effN
+}
+dat_base
+dat_base_tmp
+Reweighter <- function(replist, kind = 'AGE', dat_file_name, max_effn = 100)
+{
+if(kind == 'AGE') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$agedbase # extract agecomp data from report file
+dat_base <- ss_dat$agecomp # extract agecomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+for(i in unique(dat_base$FltSvy)){ # replace agecomp N's with report file Neffs
+dat_base[dat_base$FltSvy == i, ]$Nsamp <- report_extract[report_extract$Fleet == i, ]$effN
+}
+ss_dat_new$agecomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$agedbase
+dat_base_new <- ss_dat_new$agecomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'AGE', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$agecomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3 -nohess",wait=T,show.output.on.console=T)
+}
+}
+#------------------------------------------------------
+if(kind == 'LEN') {
+ss_dat <- SS_readdat(paste0(direct, '/', dat_file_name), verbose = F) # read in SS datafile
+report_base <- replist$lendbase # extract lengthcomp data from report file
+dat_base <- ss_dat$lencomp # extract lengthcomp data from SS.dat file
+report_extract <- unique(report_base[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')]) #Select unique rows from report file
+if(dim(dat_base)[1] != dim(report_extract)[1]) {
+stop('age comp data extracted from report file is not of the same dimension as the input age comp.  Function may need repaired')
+} # error trap comparing rows of .dat age comp and unique report file age comp.  if no match problem
+check <- sum((report_extract$effN - dat_base$Nsamp)^2) # calculate rough sum of squares
+print(paste('Check value this iteration is', check))   # print stat value
+ss_dat_new <- ss_dat # create duplicate of SS.dat file
+for(i in unique(dat_base$FltSvy)){ # replace agecomp N's with report file Neffs
+dat_base[dat_base$FltSvy == i, ]$Nsamp <- report_extract[report_extract$Fleet == i, ]$effN
+}
+ss_dat_new$lencomp <- dat_base # replace dat list age comp with new agecomp
+SS_writedat(ss_dat_new, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F) #write out new .dat file
+system("SS3 -nohess",wait=T,show.output.on.console=F) #run ss
+base_new <- SS_output(dir = direct, covar=F, cormax=0.70, forecast=F, verbose = F, printstats = F) #read in ss report
+report_base_new <- base_new$lendbase
+dat_base_new <- ss_dat_new$lencomp
+report_extract_new <- unique(report_base_new[, c('Yr', 'Seas', 'Fleet', 'Gender', 'effN')])
+check_new <- sum((report_extract_new$effN - dat_base_new$Nsamp)^2)
+if(check_new < check){
+Reweighter(base_new, kind = 'LEN', dat_file_name, max_effn)
+} else {
+if(any(dat_base$Nsamp > max_effn)){
+dat_base[dat_base$Nsamp > max_effn, ]$Nsamp <- max_effn
+ss_dat$lencomp <- dat_base
+SS_writedat(ss_dat, paste0(direct, '/', dat_file_name), overwrite = T, verbose = F)
+}
+system("SS3 -nohess",wait=T,show.output.on.console=T)
+}
+}
+}
+Reweighter(base, 'LEN', dat_file_name)
+direct
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+library("r4ss")
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+SS_plots(replist = base, uncertainty=T, plot=c(1:6,8:24),sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=T,
+dir="default", pdf=F,printfolder="R_Plots_Report")
+SS_plots(replist = base, uncertainty=t, sprtarg=0.30, btarg=0.3, datplot=T, minbthresh=-1,png=F,
+printfolder="R_Plots_Report", dir="default", pdf=T)
+SSplotCatch(replist=base,print=TRUE)
+SS_fitbiasramp(base)
+write.csv(base$highcor, file="correlations.csv")
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+library("r4ss")
+# hessian
+rm(myreplist)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+table_sub_dir <- 'Tables'
+figures_sub_dir <- 'Figures'
+if (!file.exists(table_sub_dir)) dir.create(file.path(direct, table_sub_dir))
+if (!file.exists(figures_sub_dir)) dir.create(file.path(direct, figures_sub_dir))
+# indicies
+dat <- base$cpue
+names <- unique(dat$Name)
+for(i in 1: length(names)){
+out <- dat[dat$Name == names[i], ]
+cihi <- out$Obs + 1.96*out$SE
+cilo <- out$Obs - 1.96*out$SE
+final.out <- data.frame('Year' = out$Yr, 'Observed' = out$Obs, 'Expected' = out$Exp, 'Std.Err.' = out$SE,
+'CI_Hi' = cihi, 'CI_Low' = cilo)
+name.out <- paste('Obs and Pred', names[i])
+name.out <- paste0(name.out, '.csv')
+setwd(file.path(direct, table_sub_dir))
+final.out <- final.out[-(1:2), ]
+write.csv(final.out, name.out)
+ylims <- range(final.out$Observed)
+ylims <- c(0, ylims[2]*1.25)
+setwd(file.path(direct, figures_sub_dir))
+png(paste0(paste(names[i], 'CPUE'), '.png'))
+plot(final.out$Year, final.out$Observed, pch=19, col='red', xlab = 'Year', ylab='Std.CPUE', ylim = ylims)
+points(final.out$Year, final.out$Expected, typ='l', col = 'blue', lwd = 2)
+legend('top', legend = c('OBS','PRED'), col = c('red', 'blue'), pch = c(19, NA), bty = 'n', lty = c(NA, 1))
+dev.off()
+}
+out$Yr
+length(names)
+out <- dat[dat$Name == names[i], ]
+out
+dat$Name
+final.out
+out$Obs
+out$Yr
+out
+final.out
+out$Obs
+final.out <- data.frame('Year' = out$Yr, 'Observed' = out$Obs, 'Expected' = out$Exp, 'Std.Err.' = out$SE,
+'CI_Hi' = cihi, 'CI_Low' = cilo)
+final.out
+final.out <- final.out[-(1:2), ]
+final.out
+dat <- base$timeseries
+cm_e_obs <- as.vector(dat['obs_cat:_1'])
+cm_w_obs <- dat['obs_cat:_2']
+rec_obs <- dat['obs_cat:_3']
+cm_e_pred <- dat['retain(B):_1']
+cm_w_pred <- dat['retain(B):_2']
+rec_pred <- dat['retain(N):_3']
+out <- data.frame(dat$Yr, cm_e_obs, cm_e_pred, cm_w_obs, cm_w_pred, rec_obs, rec_pred)
+names(out) <- c('Year', 'Commercial East OBS (mt)', 'Commercial East PRED (mt)',
+'Commercial West OBS (mt)', 'Commercial West PRED (mt)',
+'Recreational OBS (1000s)', 'Recreational PRED (1000s)')
+out
+dat <- base$timeseries
+dat['obs_cat:_1']
+base$timeseries
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+library("r4ss")
+# hessian
+rm(myreplist)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+setwd("R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/Final/Base")
+rm(SS_output)
+rm(SS_plots)
+rm(list=ls())
+library("devtools")
+devtools::install_github("r4ss/r4ss") #, ref="v1.23.1")
+library("r4ss")
+# hessian
+rm(myreplist)
+#direct <- "R:\\_Assessments-SEDAR\\GAJ_2013\\Assessment models\\Stock Synthesis\\Predecisional\\SSC RUNS\\ssc base2"
+#direct  <- "R:/_Assessments-SEDAR/SEDAR_45_GoM_Vermilion_Snapper/Assessment models/StockSynthesis/6. Base Model Runs/B. base/test double normal priors/no priors"
+direct <- getwd()
+base <- SS_output(dir = direct,printstats = T, covar=T, cormax=0.70, forecast=F,printhighcor=50, printlowcor=50)
+table_sub_dir <- 'Tables'
+figures_sub_dir <- 'Figures'
+if (!file.exists(table_sub_dir)) dir.create(file.path(direct, table_sub_dir))
+if (!file.exists(figures_sub_dir)) dir.create(file.path(direct, figures_sub_dir))
+# indicies
+dat <- base$cpue
+names <- unique(dat$Name)
+for(i in 1: length(names)){
+out <- dat[dat$Name == names[i], ]
+cihi <- out$Obs + 1.96*out$SE
+cilo <- out$Obs - 1.96*out$SE
+final.out <- data.frame('Year' = out$Yr, 'Observed' = out$Obs, 'Expected' = out$Exp, 'Std.Err.' = out$SE,
+'CI_Hi' = cihi, 'CI_Low' = cilo)
+name.out <- paste('Obs and Pred', names[i])
+name.out <- paste0(name.out, '.csv')
+setwd(file.path(direct, table_sub_dir))
+write.csv(final.out, name.out)
+ylims <- range(final.out$Observed)
+ylims <- c(0, ylims[2]*1.25)
+setwd(file.path(direct, figures_sub_dir))
+png(paste0(paste(names[i], 'CPUE'), '.png'))
+plot(final.out$Year, final.out$Observed, pch=19, col='red', xlab = 'Year', ylab='Std.CPUE', ylim = ylims)
+points(final.out$Year, final.out$Expected, typ='l', col = 'blue', lwd = 2)
+legend('top', legend = c('OBS','PRED'), col = c('red', 'blue'), pch = c(19, NA), bty = 'n', lty = c(NA, 1))
+dev.off()
+}
+table_sub_dir <- 'Tables'
+figures_sub_dir <- 'Figures'
+if (!file.exists(table_sub_dir)) dir.create(file.path(direct, table_sub_dir))
+if (!file.exists(figures_sub_dir)) dir.create(file.path(direct, figures_sub_dir))
+# indicies
+dat <- base$cpue
+names <- unique(dat$Name)
+for(i in 1: length(names)){
+out <- dat[dat$Name == names[i], ]
+cihi <- out$Obs + 1.96*out$SE
+cilo <- out$Obs - 1.96*out$SE
+final.out <- data.frame('Year' = out$Yr, 'Observed' = out$Obs, 'Expected' = out$Exp, 'Std.Err.' = out$SE,
+'CI_Hi' = cihi, 'CI_Low' = cilo)
+name.out <- paste('Obs and Pred', names[i])
+name.out <- paste0(name.out, '.csv')
+setwd(file.path(direct, table_sub_dir))
+write.csv(final.out, name.out)
+ylims <- range(final.out$Observed)
+ylims <- c(0, ylims[2]*1.25)
+setwd(file.path(direct, figures_sub_dir))
+png(paste0(paste(names[i], 'CPUE'), '.png'))
+plot(final.out$Year, final.out$Expected, typ='l', col = 'blue', lwd = 2, xlab = 'Year', ylab='Std.CPUE', ylim = ylims)
+points(final.out$Year, final.out$Observed, pch=19, col='red')
+legend('top', legend = c('OBS','PRED'), col = c('red', 'blue'), pch = c(19, NA), bty = 'n', lty = c(NA, 1))
+dev.off()
+}
