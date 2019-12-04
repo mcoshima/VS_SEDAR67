@@ -282,9 +282,9 @@
              1            10       4.3           4.3          0.0             0          2          0          0          0          0        0          0          0  #  Age_DblN_peak_REC(14)
            -10             3      -4.6          -4.6          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_top_logit_REC(14)
             -6            12       0.7           0.7          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_ascend_se_REC(14)
-            -4             6       2.7           2.7          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_descend_se_REC(14)
-           -15             5      -11.2         -11.2         0.0             0          2          0          0          0          0        0          0          0  #  Age_DblN_start_logit_REC(14)
-            -8             5      -3.3          -3.3          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_end_logit_REC(14)
+            -4             6       -2           2.7          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_descend_se_REC(14)
+           -15             5      -5         -11.2         0.0             0          2          0          0          0          0        0          0          0  #  Age_DblN_start_logit_REC(14)
+            -8             5      1          -3.3          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_end_logit_REC(14)
 # 4   SMP_BYC AgeSelex
         1e-007             2           0.5           0.5             0             0         -4          0          0          0          0          0          0          0  #  AgeSel_P1_SMP_BYC(4)
            0.5        1e+007           100           100             0             0         -4          0          0          0          0          0          0          0  #  AgeSel_P2_SMP_BYC(4)
@@ -298,17 +298,17 @@
 # 8   CM_W_IFQ AgeSelex
 # 9   LARVAL AgeSelex
 # 10   VIDEO AgeSelex
-            0             15           2.66             2.66             0              0         -2          0          0          0          0          0          0          0
-            0             15           7.2774           7.2774           0              0         -2          0          0          0          0          0          0          0
+            0             15           0.1            2.66             0              0      -2          0          0          0          0          0          0          0
+            0             15           14           7.2774             0              0      -2          0          0          0          0          0          0          0
 # 11   SEAMAP AgeSelex
-            0             15           2.66             2.66             0              0           -2          0          0          0          0          0          0          0
-            0             15           7.2774           7.2774           0              0         -2          0          0          0          0          0          0          0
+            0             15           0.1            2.66             0              0      -2          0          0          0          0          0          0          0
+            0             15           14           7.2774             0              0      -2          0          0          0          0          0          0          0
 
 # timevary selex parameters 
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type    PHASE  #  parm_name
-           0.5            14       2.47319          2.66              0             0      3  # Age_inflection_CM_E(1)_BLK1repl_2007
-           0.5            14       0.838296        7.2774            0             0      1  # Age_95%width_CM_E(1)_BLK1repl_2007
-           0.5            14       3.91039          2.66              0             0      3  # Age_inflection_CM_W(2)_BLK1repl_2007
+           0.5            14       2.66           2.66             0             0      3  # Age_inflection_CM_E(1)_BLK1repl_2007
+           0.5            14       7.2774        7.2774            0             0      1  # Age_95%width_CM_E(1)_BLK1repl_2007
+           0.5            14       2.66           2.66             0             0      3  # Age_inflection_CM_W(2)_BLK1repl_2007
            0.5            14       7.2774        7.2774            0             0      1  # Age_95%width_CM_W(2)_BLK1repl_2007
 # info on dev vectors created for selex parms are reported with other devs after tag parameter section 
 #
