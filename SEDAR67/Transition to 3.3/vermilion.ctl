@@ -274,10 +274,10 @@
             -8             5           0.1       0.1          0.0             0          2          0          0          0          0        0          0          0  #  Size_DblN_end_logit_SEAMAP(11)
 # 1   CM_E AgeSelex
            0.5            14       2.66          2.66             0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_E(1)
-           0.5            14      7.2774        7.2774            0             0          2          0          0          0          0          0          1          2  #  Age_95%width_CM_E(1)
+           0.5            14      7.2774        7.2774            0             0          1          0          0          0          0          0          1          2  #  Age_95%width_CM_E(1)
 # 2   CM_W AgeSelex
            0.5            14       2.66          2.66             0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_W(2)
-           0.5            14       7.2775        7.2774           0             0          2          0          0          0          0          0          1          2  #  Age_95%width_CM_W(2)
+           0.5            14       7.2775        7.2774           0             0          1          0          0          0          0          0          1          2  #  Age_95%width_CM_W(2)
 # 3   REC AgeSelex
              1            10       4.3           4.3          0.0             0          2          0          0          0          0        0          0          0  #  Age_DblN_peak_REC(14)
            -10             3      -4.6          -4.6          0.0             0          3          0          0          0          0        0          0          0  #  Age_DblN_top_logit_REC(14)
@@ -298,18 +298,18 @@
 # 8   CM_W_IFQ AgeSelex
 # 9   LARVAL AgeSelex
 # 10   VIDEO AgeSelex
-            0             15           0.1          2.66             0              0          3          0          0          0          0          0          0          0
-            0             15           14           7.2774           0              0          2          0          0          0          0          0          0          0
+            0             15           2.66             2.66             0              0         -2          0          0          0          0          0          0          0
+            0             15           7.2774           7.2774           0              0         -2          0          0          0          0          0          0          0
 # 11   SEAMAP AgeSelex
-            0             15           0.1          2.66             0              0          3          0          0          0          0          0          0          0
-            0             15           14           7.2774           0              0          2          0          0          0          0          0          0          0
+            0             15           2.66             2.66             0              0           -2          0          0          0          0          0          0          0
+            0             15           7.2774           7.2774           0              0         -2          0          0          0          0          0          0          0
 
 # timevary selex parameters 
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type    PHASE  #  parm_name
-           0.5            14       2.66          2.66              0             0      3  # Age_inflection_CM_E(1)_BLK1repl_2007
-           0.5            14       7.2774        7.2774            0             0      2  # Age_95%width_CM_E(1)_BLK1repl_2007
-           0.5            14       2.66          2.66              0             0      3  # Age_inflection_CM_W(2)_BLK1repl_2007
-           0.5            14       7.2774        7.2774            0             0      2  # Age_95%width_CM_W(2)_BLK1repl_2007
+           0.5            14       2.47319          2.66              0             0      3  # Age_inflection_CM_E(1)_BLK1repl_2007
+           0.5            14       0.838296        7.2774            0             0      1  # Age_95%width_CM_E(1)_BLK1repl_2007
+           0.5            14       3.91039          2.66              0             0      3  # Age_inflection_CM_W(2)_BLK1repl_2007
+           0.5            14       7.2774        7.2774            0             0      1  # Age_95%width_CM_W(2)_BLK1repl_2007
 # info on dev vectors created for selex parms are reported with other devs after tag parameter section 
 #
 0   #  use 2D_AR1 selectivity(0/1):  experimental feature
