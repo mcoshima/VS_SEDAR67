@@ -245,8 +245,8 @@
  15 0 0 1 # 7 CM_E_IFQ
  15 0 0 2 # 8 CM_W_IFQ
  10 0 0 0 # 9 LARVAL
- 11 0 0 0 # 10 VIDEO
- 11 0 0 0 # 11 SEAMAP
+ 0 0 0 0 # 10 VIDEO
+ 0 0 0 0 # 11 SEAMAP
 #
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  #  parm_name
 # 1   CM_E LenSelex
@@ -259,32 +259,32 @@
 # 8   CM_W_IFQ LenSelex
 # 9   LARVAL LenSelex
 # 10   VIDEO LenSelex
-           7.5          52.5       27.4          42.7         0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_peak_VIDEO(10)
-           -10             3      -8.5          -0.4          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_top_logit_VIDEO(10)
-            -6            12       4.1           5.5          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_ascend_se_VIDEO(10)
-            -4             6       -3.8           5.1          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_descend_se_VIDEO(10)
-           -15             5      -5.4          -4.2          0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_start_logit_VIDEO(10)
-            -8             5       1.0           0.4          0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_end_logit_VIDEO(10)
+           3.5          52.5       27.4          42.7         0             0          2          0          0          0          0        0          0          0  #  Size_DblN_peak_VIDEO(10)
+           -10             0      -8.5          -0.4          0             0          3          0          0          0          0        0          0          0  #  Size_DblN_top_logit_VIDEO(10)
+             0            12       4.1           5.5          0             0          3          0          0          0          0        0          0          0  #  Size_DblN_ascend_se_VIDEO(10)
+            -5             0      -3.8           5.1          0             0          3          0          0          0          0        0          0          0  #  Size_DblN_descend_se_VIDEO(10)
+           -15             0      -5.4          -4.2          0             0          2          0          0          0          0        0          0          0  #  Size_DblN_start_logit_VIDEO(10)
+           0.5             5       1.2           0.4          0             0          2          0          0          0          0        0          0          0  #  Size_DblN_end_logit_VIDEO(10)
 # 11   SEAMAP LenSelex
-           7.5          52.5            13       13           0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_peak_SEAMAP(11)
-           -10             3          -5.38      -1.1          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_top_logit_SEAMAP(11)
-            -6            12            -0.5      3.1          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_ascend_se_SEAMAP(11)
-            -4             6            3.6          5          0.05             0          3          0          0          0          0        0          0          0  #  Size_DblN_descend_se_SEAMAP(11)
-           -15             5          -0.4      -4.5          0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_start_logit_SEAMAP(11)
-            -8             5           -5.9       0.1          0.05             0          2          0          0          0          0        0          0          0  #  Size_DblN_end_logit_SEAMAP(11)
+           7.5          52.5            13       13           0             0          2          0          0          0          0        0          0          0  #  Size_DblN_peak_SEAMAP(11)
+           -10             3          -5.38      -1.1         0             0          3          0          0          0          0        0          0          0  #  Size_DblN_top_logit_SEAMAP(11)
+            -6            12            -0.5      3.1         0             0          3          0          0          0          0        0          0          0  #  Size_DblN_ascend_se_SEAMAP(11)
+            -4             6            3.6          5        0             0          3          0          0          0          0        0          0          0  #  Size_DblN_descend_se_SEAMAP(11)
+           -15             5          -0.4      -4.5          0             0          2          0          0          0          0        0          0          0  #  Size_DblN_start_logit_SEAMAP(11)
+            -8             5           -5.9       0.1         0             0          2          0          0          0          0        0          0          0  #  Size_DblN_end_logit_SEAMAP(11)
 # 1   CM_E AgeSelex
-           0.5            14       2.4          2.66             0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_E(1)
-           0.5            14      0.8       7.2774            0             0          1          0          0          0          0          0          1          2  #  Age_95%width_CM_E(1)
+           0.5            14      2.4          2.66            0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_E(1)
+           0.5            14      0.8         7.2774           0             0          1          0          0          0          0          0          1          2  #  Age_95%width_CM_E(1)
 # 2   CM_W AgeSelex
-           0.5            14       3.4          2.66             0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_W(2)
+           0.5            14       3.4        2.66             0             0          3          0          0          0          0          0          1          2  #  Age_inflection_CM_W(2)
            0.5            14       1.4        7.2774           0             0          1          0          0          0          0          0          1          2  #  Age_95%width_CM_W(2)
 # 3   REC AgeSelex
-             1            10       4.3           4.3          0.05             0          2          0          0          0          0        0          0          0  #  Age_DblN_peak_REC(14)
-           -10             3      -4.6          -4.6          0.05             0          3          0          0          0          0        0          0          0  #  Age_DblN_top_logit_REC(14)
-            -6            12       0.7           0.7          0.05             0          3          0          0          0          0        0         0          0  #  Age_DblN_ascend_se_REC(14)
-            -4             6       2.7           2.7          0.05             0          3          0          0          0          0        0          0          0  #  Age_DblN_descend_se_REC(14)
-           -15             5      -11.2         -11.2         0.05             0          2          0          0          0          0        0          0          0  #  Age_DblN_start_logit_REC(14)
-            -8             5      -3.3          -3.3          0.05             0          3          0          0          0          0        0          0          0  #  Age_DblN_end_logit_REC(14)
+             1            10       3.89           4.3          0.             0          2          0          0          0          0        0          0          0  #  Age_DblN_peak_REC(14)
+           -10           -1.5      -1.9          -4.6        0.             0          3          0          0          0          0        0          0          0  #  Age_DblN_top_logit_REC(14)
+            -6            12       0.5           0.7          0.             0          3          0          0          0          0        0         0          0  #  Age_DblN_ascend_se_REC(14)
+             0             6       3.4           2.7        0.             0          3          0          0          0          0        0          0          0  #  Age_DblN_descend_se_REC(14)
+           -16             5      -14.2         -11.2      0.             0          2          0          0          0          0        0          0          0  #  Age_DblN_start_logit_REC(14)
+           -10            -1.5     -2.5             -3.3       0.             0          3          0          0          0          0        0          0          0  #  Age_DblN_end_logit_REC(14)
 # 4   SMP_BYC AgeSelex
         1e-007             2           0.5           0.5             0             0         -4          0          0          0          0          0          0          0  #  AgeSel_P1_SMP_BYC(4)
            0.5        1e+007           100           100             0             0         -4          0          0          0          0          0          0          0  #  AgeSel_P2_SMP_BYC(4)
@@ -298,11 +298,11 @@
 # 8   CM_W_IFQ AgeSelex
 # 9   LARVAL AgeSelex
 # 10   VIDEO AgeSelex
-            0             15           0.1          2.66             0              0           -2          0          0          0          0          0          0          0
-            0             15           14           7.2774             0              0         -2          0          0          0          0          0          0          0
+#            0             15           0          2.66             0              0           -2          0          0          0          0          0          0          0
+#            0             15           14           7.2774             0              0         -2          0          0          0          0          0          0          0
 # 11   SEAMAP AgeSelex
-            0             15           0.1          2.66             0              0           -2          0          0          0          0          0          0          0
-            0             15           14           7.2774             0              0         -1          0          0          0          0          0          0          0
+#            0             15           0          2.66             0              0           -2          0          0          0          0          0          0          0
+#            0             15           14           7.2774             0              0         -1          0          0          0          0          0          0          0
 # timevary selex parameters 
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type    PHASE  #  parm_name
            0.5            14       2.51778          2.66             0             0      3  # Age_inflection_CM_E(1)_BLK1repl_2007
